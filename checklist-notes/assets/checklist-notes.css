@@ -340,6 +340,29 @@ body .markdown-source-view.mod-cm6.checklist-notes .HyperMD-list-line-3 .cm-form
   content: counter(cn-l3, lower-roman) ".";
 }
 
+/* ===== 编辑模式列表缩进：padding-left 每级 +2em，.cm-indent 宽度归零避免叠加 =====
+   Obsidian 实时预览下，列表层级缩进由 .cm-line 的 inline padding-left 承载，
+   .cm-indent 只是缩进参考线（indentation guide）的载体。默认每级约 1em，偏浅。
+   这里完整覆盖 line-1~4：一级顶格、二级/三级/四级逐级 +2em；.cm-indent 只负责
+   画线（线已用官方变量关透明），宽度归零，避免与 padding-left 双重叠加。 */
+body .markdown-source-view.mod-cm6.checklist-notes .cm-indent {
+  width: 0 !important;
+  min-width: 0 !important;
+  max-width: 0 !important;
+}
+body .markdown-source-view.mod-cm6.checklist-notes .HyperMD-list-line-1 {
+  padding-left: 0 !important;
+}
+body .markdown-source-view.mod-cm6.checklist-notes .HyperMD-list-line-2 {
+  padding-left: 2em !important;
+}
+body .markdown-source-view.mod-cm6.checklist-notes .HyperMD-list-line-3 {
+  padding-left: 4em !important;
+}
+body .markdown-source-view.mod-cm6.checklist-notes .HyperMD-list-line-4 {
+  padding-left: 6em !important;
+}
+
 /* ===== 关闭列表缩进参考竖线（Blue Topaz indentation guide）===== */
 body .markdown-preview-view.checklist-notes :is(ol, ul) :is(ol, ul)::before,
 body.bt-colorful-indentation-lines .markdown-preview-view.checklist-notes :is(ol, ul) :is(ol, ul)::before,
