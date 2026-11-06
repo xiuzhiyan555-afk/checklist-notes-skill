@@ -4,7 +4,7 @@
 
 ## 怎么用
 
-前提：你已有 Obsidian 笔记库，以及能访问本地文件的 Agent，例如 Codex 或 WorkBuddy。
+前提：你已有 Obsidian 笔记库，以及能访问本地文件的 Agent，例如 WorkBuddy 或 Codex。
 
 把本仓库链接发给 Agent，再复制这句话：
 
@@ -16,11 +16,17 @@
 
 ## 下载
 
-如果 Agent 无法直接访问 GitHub，下载并解压[完整安装包](清单体笔记Skill-v0.3.zip)，把解压后的文件夹交给 Agent，再发送上面的指令。
+如果 Agent 无法直接访问 GitHub，下载并解压[纯技能包](checklist-notes-skill-v0.6.zip)，把解压后的 `checklist-notes` 文件夹交给 Agent，再发送上面的指令。
 
 [了解整理规则](清单体笔记Skill.md) · [安装指引](checklist-notes/references/安装与兼容.md)
 
-只有一个 Skill：`checklist-notes/SKILL.md` 是 AI 规则入口，`清单体笔记Skill.md` 是给人看的说明。完整安装包已包含规则、样式与样例。
+## 文件说明
+
+只有一个 Skill：`checklist-notes/SKILL.md` 是 AI 规则入口，`清单体笔记Skill.md` 是给人看的说明。`checklist-notes/assets/checklist-notes.css` 是配套样式，`checklist-notes/scripts/install_obsidian.py` 是一键安装脚本，`checklist-notes-skill-v0.6.zip` 是 WorkBuddy 可上传的纯技能包。
+
+## 环境说明
+
+样式以 Obsidian 默认主题（无第三方主题）为基准设计，无法保证在每台电脑上完全一致——电脑与系统、Obsidian 版本、启用的主题、库里已有的 CSS 片段都可能影响显示。发现颜色、表格等样式不规范时，直接请 AI 针对性调整即可，不必自己排查。
 
 ## 使用边界
 
