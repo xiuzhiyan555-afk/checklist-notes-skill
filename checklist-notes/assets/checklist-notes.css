@@ -1,0 +1,231 @@
+/* checklist-notes v0.2 | Standalone Obsidian snippet.
+   Scope: only notes with cssclasses: [checklist-notes].
+   Reading view + Live Preview; active editing syntax stays visible.
+   Native list markers are preserved. No plugins or external assets. */
+.checklist-notes {
+  --cn-heading: #e4bf62;
+  --cn-label: #ed937d;
+  --cn-sub: #d9b9aa;
+  --cn-detail: #a8a8a8;
+  --cn-text: #d5d5d5;
+  --cn-emphasis: #91c6a4;
+  --cn-link: #d978a8;
+  --cn-marker: #81a9cd;
+  --cn-border: #626a64;
+  --cn-header-bg: #302f2a;
+  --cn-row-bg: #252925;
+  --cn-callout: 95, 154, 210;
+  --cn-font-size: 16px;
+  --cn-line-height: 1.7;
+  --cn-width: 960px;
+  --font-text-size: var(--cn-font-size);
+  --line-height-normal: var(--cn-line-height);
+  --file-line-width: var(--cn-width);
+  --bold-weight: 700;
+  --list-spacing: .35em;
+  --p-spacing: .85rem;
+  --h1-color: var(--cn-heading);
+  --h2-color: var(--cn-heading);
+  --h3-color: var(--cn-label);
+  --text-normal: var(--cn-text);
+  --text-highlight-bg: transparent;
+  --table-cell-vertical-alignment: top;
+}
+.theme-light .checklist-notes {
+  --cn-heading: #896516;
+  --cn-label: #a34c36;
+  --cn-sub: #886251;
+  --cn-detail: #555555;
+  --cn-text: #333333;
+  --cn-emphasis: #30744b;
+  --cn-link: #a94379;
+  --cn-marker: #477aa5;
+  --cn-border: #b5bdb7;
+  --cn-header-bg: #f1eee6;
+  --cn-row-bg: #f5f7f4;
+}
+/* Shared typography. Avoid changing CodeMirror line display or indentation. */
+body :is(.markdown-preview-view, .markdown-source-view.mod-cm6).checklist-notes {
+  color: var(--cn-text);
+  font-size: var(--cn-font-size);
+  line-height: var(--cn-line-height);
+}
+body .markdown-preview-view.checklist-notes .markdown-preview-sizer,
+body .markdown-source-view.mod-cm6.checklist-notes .cm-sizer {
+  max-width: var(--cn-width);
+  margin-inline: auto;
+}
+body .markdown-preview-view.checklist-notes :is(p, li, td),
+body .markdown-source-view.mod-cm6.checklist-notes .cm-line {
+  overflow-wrap: break-word;
+  word-break: normal;
+  text-wrap: pretty;
+}
+body .markdown-preview-view.checklist-notes p {
+  margin-block: .55em .85em;
+}
+body .markdown-preview-view.checklist-notes :is(h1, h2),
+body .markdown-source-view.mod-cm6.checklist-notes :is(.cm-header-1, .cm-header-2),
+body :is(.markdown-preview-view, .markdown-source-view.mod-cm6).checklist-notes .inline-title {
+  color: var(--cn-heading) !important;
+  font-weight: 700;
+}
+body .markdown-preview-view.checklist-notes h2 {
+  margin-block: 1.5em .65em;
+}
+body .markdown-preview-view.checklist-notes :is(ol, ul) {
+  margin-block: .4em .7em;
+}
+body .markdown-preview-view.checklist-notes li {
+  margin-block: .35em;
+}
+body .markdown-preview-view.checklist-notes li::marker {
+  color: var(--cn-marker);
+}
+/* Exactly one structural bold label per item; content emphasis uses == ==. */
+body .markdown-preview-view.checklist-notes li > strong:first-child,
+body .markdown-preview-view.checklist-notes li > p > strong:first-child,
+body .markdown-source-view.mod-cm6.checklist-notes .HyperMD-list-line-1 .cm-strong {
+  color: var(--cn-label);
+  font-weight: 700;
+}
+body .markdown-preview-view.checklist-notes li li > strong:first-child,
+body .markdown-preview-view.checklist-notes li li > p > strong:first-child,
+body .markdown-source-view.mod-cm6.checklist-notes .HyperMD-list-line-2 .cm-strong {
+  color: var(--cn-sub);
+}
+body .markdown-preview-view.checklist-notes li li li > strong:first-child,
+body .markdown-preview-view.checklist-notes li li li > p > strong:first-child,
+body .markdown-source-view.mod-cm6.checklist-notes .HyperMD-list-line-3 .cm-strong {
+  color: var(--cn-detail);
+}
+/* Semantic emphasis only, never em or an entire parent row. */
+body .markdown-preview-view.checklist-notes mark,
+body .markdown-source-view.mod-cm6.checklist-notes .cm-highlight,
+body .markdown-source-view.mod-cm6.checklist-notes mark {
+  color: var(--cn-emphasis) !important;
+  background: transparent !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
+  padding: 0;
+  box-shadow: none;
+}
+body .markdown-source-view.mod-cm6.checklist-notes .cm-formatting-highlight {
+  color: var(--text-faint) !important;
+  font-weight: 400 !important;
+}
+body .markdown-preview-view.checklist-notes em,
+body .markdown-source-view.mod-cm6.checklist-notes .cm-em {
+  color: inherit;
+  font-weight: inherit;
+}
+body .markdown-preview-view.checklist-notes a,
+body .markdown-source-view.mod-cm6.checklist-notes :is(.cm-link, .cm-hmd-internal-link, .cm-url) {
+  color: var(--cn-link);
+}
+body .markdown-source-view.mod-cm6.checklist-notes .cm-formatting-list {
+  color: var(--cn-marker);
+}
+/* Same table cells in reading and the rendered live-preview table widget. */
+body :is(.markdown-preview-view, .markdown-source-view.mod-cm6).checklist-notes table {
+  width: 100%;
+  table-layout: auto;
+  border-collapse: collapse;
+  font-size: var(--cn-font-size);
+  line-height: var(--cn-line-height);
+  margin-block: 1em;
+}
+body :is(.markdown-preview-view, .markdown-source-view.mod-cm6).checklist-notes :is(th, td) {
+  border: 1px solid var(--cn-border);
+  padding: 10px 14px;
+  vertical-align: top;
+  color: var(--cn-text);
+  line-height: var(--cn-line-height);
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+body :is(.markdown-preview-view, .markdown-source-view.mod-cm6).checklist-notes th {
+  background: var(--cn-header-bg);
+  font-weight: 700;
+  text-align: left;
+}
+body :is(.markdown-preview-view, .markdown-source-view.mod-cm6).checklist-notes tbody tr:nth-child(even) {
+  background: var(--cn-row-bg);
+}
+body :is(.markdown-preview-view, .markdown-source-view.mod-cm6).checklist-notes td strong {
+  color: var(--cn-detail);
+  font-weight: 700;
+}
+body .markdown-preview-view.checklist-notes .el-table,
+body .markdown-source-view.mod-cm6.checklist-notes .cm-table-widget {
+  max-width: 100%;
+  overflow-x: auto;
+}
+body :is(.markdown-preview-view, .markdown-source-view.mod-cm6).checklist-notes .callout[data-callout="info"] {
+  --callout-color: var(--cn-callout);
+}
+body :is(.markdown-preview-view, .markdown-source-view.mod-cm6).checklist-notes .callout strong {
+  color: var(--cn-text);
+  font-weight: 700;
+}
+body .markdown-preview-view.checklist-notes code,
+body .markdown-source-view.mod-cm6.checklist-notes .cm-inline-code {
+  color: var(--cn-text);
+  font-style: normal;
+  font-weight: 400;
+}
+
+/* Rendered strong in editor widgets, h3 and markers share explicit semantics. */
+body .markdown-preview-view.checklist-notes h3,
+body .markdown-source-view.mod-cm6.checklist-notes .cm-header-3 {
+  color: var(--cn-label) !important;
+}
+body .markdown-source-view.mod-cm6.checklist-notes .cm-strong {
+  font-weight: 700;
+}
+body .markdown-source-view.mod-cm6.checklist-notes .HyperMD-list-line .cm-strong {
+  color: var(--cn-label);
+}
+body .markdown-source-view.mod-cm6.checklist-notes .HyperMD-list-line-2 .cm-strong {
+  color: var(--cn-sub);
+}
+body .markdown-source-view.mod-cm6.checklist-notes .HyperMD-list-line-3 .cm-strong {
+  color: var(--cn-detail);
+}
+
+/* Screenshot entry only; ordinary notes keep editable properties visible. */
+body .checklist-notes.checklist-cover .metadata-container { display: none; }
+body .markdown-preview-view.checklist-notes h1 {
+  border-bottom-color: var(--cn-border);
+}
+body .markdown-source-view.mod-cm6.checklist-notes :is(.HyperMD-header-1, .HyperMD-header-2) {
+  color: var(--cn-heading) !important;
+}
+
+/* Scoped table rules also win over existing vault-wide gradient snippets. */
+body :is(.markdown-preview-view, .markdown-source-view.mod-cm6).checklist-notes.checklist-notes.checklist-notes table:not(.table-view-table) {
+  table-layout: auto !important;
+  border-collapse: collapse !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  border: 1px solid var(--cn-border) !important;
+}
+body :is(.markdown-preview-view, .markdown-source-view.mod-cm6).checklist-notes.checklist-notes.checklist-notes table:not(.table-view-table) :is(th, td) {
+  padding: 10px 14px !important;
+  border: 1px solid var(--cn-border) !important;
+  background-image: none !important;
+  color: var(--cn-text) !important;
+  -webkit-text-fill-color: currentColor !important;
+  vertical-align: top !important;
+}
+body :is(.markdown-preview-view, .markdown-source-view.mod-cm6).checklist-notes.checklist-notes.checklist-notes table:not(.table-view-table) th {
+  background: var(--cn-header-bg) !important;
+}
+body :is(.markdown-preview-view, .markdown-source-view.mod-cm6).checklist-notes.checklist-notes.checklist-notes table:not(.table-view-table) td {
+  background: var(--background-primary) !important;
+}
+body :is(.markdown-preview-view, .markdown-source-view.mod-cm6).checklist-notes.checklist-notes.checklist-notes table:not(.table-view-table) tr:nth-child(even) td {
+  background: var(--cn-row-bg) !important;
+}
