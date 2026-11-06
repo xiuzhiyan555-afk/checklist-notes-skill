@@ -270,6 +270,13 @@ body .markdown-preview-view.checklist-notes :is(ol,ul) :is(ol,ul) :is(ol,ul) > l
 body .markdown-source-view.mod-cm6.checklist-notes .HyperMD-list-line-1 .cm-strong {color:var(--cn-label) !important;}
 body .markdown-source-view.mod-cm6.checklist-notes .HyperMD-list-line-2 .cm-strong {color:var(--cn-sub) !important;}
 body .markdown-source-view.mod-cm6.checklist-notes .HyperMD-list-line-3 .cm-strong {color:var(--cn-detail) !important;}
+/* Table row names use the same first-level color in Reading and Live Preview,
+   including ordinary text without Markdown bold markers. */
+body :is(.markdown-preview-view,.markdown-source-view.mod-cm6).checklist-notes.checklist-notes.checklist-notes table:not(.table-view-table) tbody td:first-child {
+  color: var(--cn-label) !important;
+  -webkit-text-fill-color: currentColor !important;
+  font-weight: 700 !important;
+}
 body :is(.markdown-preview-view,.markdown-source-view.mod-cm6).checklist-notes table tbody td:first-child strong { color:var(--cn-label) !important; }
 body :is(.markdown-preview-view,.markdown-source-view.mod-cm6).checklist-notes table tbody td:nth-child(2) strong { color:var(--cn-sub) !important; }
 body :is(.markdown-preview-view,.markdown-source-view.mod-cm6).checklist-notes table tbody td:nth-child(n+3) strong { color:var(--cn-detail) !important; }
@@ -340,27 +347,10 @@ body .markdown-source-view.mod-cm6.checklist-notes .HyperMD-list-line-3 .cm-form
   content: counter(cn-l3, lower-roman) ".";
 }
 
-/* ===== 编辑模式列表缩进：padding-left 每级 +2em，.cm-indent 宽度归零避免叠加 =====
-   Obsidian 实时预览下，列表层级缩进由 .cm-line 的 inline padding-left 承载，
-   .cm-indent 只是缩进参考线（indentation guide）的载体。默认每级约 1em，偏浅。
-   这里完整覆盖 line-1~4：一级顶格、二级/三级/四级逐级 +2em；.cm-indent 只负责
-   画线（线已用官方变量关透明），宽度归零，避免与 padding-left 双重叠加。 */
-body .markdown-source-view.mod-cm6.checklist-notes .cm-indent {
-  width: 0 !important;
-  min-width: 0 !important;
-  max-width: 0 !important;
-}
-body .markdown-source-view.mod-cm6.checklist-notes .HyperMD-list-line-1 {
-  padding-left: 0 !important;
-}
-body .markdown-source-view.mod-cm6.checklist-notes .HyperMD-list-line-2 {
-  padding-left: 2em !important;
-}
-body .markdown-source-view.mod-cm6.checklist-notes .HyperMD-list-line-3 {
-  padding-left: 4em !important;
-}
-body .markdown-source-view.mod-cm6.checklist-notes .HyperMD-list-line-4 {
-  padding-left: 6em !important;
+/* 编辑模式使用 Obsidian 的原生列表缩进。不要把 .cm-indent 宽度归零：
+   该元素与编辑器的缩进布局相关，归零会让 a/b/c 看起来与一级平齐。 */
+body .markdown-source-view.mod-cm6.checklist-notes {
+  --list-indent: 2em;
 }
 
 /* ===== 关闭列表缩进参考竖线（Blue Topaz indentation guide）===== */
@@ -421,4 +411,22 @@ body :is(.markdown-preview-view, .markdown-source-view.mod-cm6).checklist-notes 
 }
 body :is(.markdown-preview-view, .markdown-source-view.mod-cm6).checklist-notes table ol.course-training > li::marker {
   content: "" !important;
+}
+/* Give nested CodeMirror list rows a visible block offset in Live Preview. */
+body .markdown-source-view.mod-cm6.checklist-notes .HyperMD-list-line-2 {
+  margin-left: 2em !important;
+  width: calc(100% - 2em) !important;
+}
+body .markdown-source-view.mod-cm6.checklist-notes .HyperMD-list-line-3 {
+  margin-left: 4em !important;
+  width: calc(100% - 4em) !important;
+}
+
+/* Visually join a populated stage cell with following empty first-column cells.
+   Markdown has no rowspan; this removes internal horizontal borders only. */
+body :is(.markdown-preview-view, .markdown-source-view.mod-cm6).checklist-notes.checklist-notes.checklist-notes table:not(.table-view-table):has(thead th:nth-child(3)) tbody tr:has(+ tr > td:first-child:empty) > td:first-child {
+  border-bottom: 0 !important;
+}
+body :is(.markdown-preview-view, .markdown-source-view.mod-cm6).checklist-notes.checklist-notes.checklist-notes table:not(.table-view-table):has(thead th:nth-child(3)) tbody tr > td:first-child:empty {
+  background: transparent !important;
 }
