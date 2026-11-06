@@ -357,16 +357,9 @@ body .markdown-source-view.mod-cm6.checklist-notes {
   --indentation-guide-color: transparent !important;
   --indentation-guide-color-active: transparent !important;
 }
-body .markdown-source-view.mod-cm6.checklist-notes .cm-indent::before,
-body .markdown-source-view.mod-cm6.checklist-notes .cm-indent::after,
-body .markdown-source-view.mod-cm6.checklist-notes .cm-hmd-list-indent::before,
-body .markdown-source-view.mod-cm6.checklist-notes .cm-hmd-list-indent::after {
-  content: none !important;
-  display: none !important;
-  border: 0 !important;
-  background: transparent !important;
-  box-shadow: none !important;
-}
+/* 只关竖线，绝不碰缩进空白：编辑模式二级/三级列表的缩进由 .cm-indent 宽度
+   和 .cm-hmd-list-indent 内容提供，不能 content:none 掉，否则 a./i. 会顶到与
+   一级数字同一列、失去层级缩进。默认主题下竖线用官方变量关闭即可。 */
 
 /* ===== 表格内嵌训练清单（ol.course-training，自动 1-5 计数）===== */
 body :is(.markdown-preview-view, .markdown-source-view.mod-cm6).checklist-notes table ol.course-training {
